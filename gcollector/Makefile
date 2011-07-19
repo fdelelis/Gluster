@@ -24,9 +24,9 @@ CLEANDIRS = \
 all: clean
 
 install:
-	@install -m 0600 -d $(sysconfdir)/$(PROGRAM)
-	@install -m 0600 -d $(sysconfdir)/$(PROGRAM)/ganglia.d
-	@install -m 0600 -d $(sysconfdir)/$(PROGRAM)/ganglia.custom.d
+	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)
+	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)/ganglia.d
+	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)/ganglia.custom.d
 	@install -m 0640 conf/$(PROGRAM)/$(PROGRAM).cfg $(sysconfdir)/$(PROGRAM)/
 	@install -m 0750 conf/$(PROGRAM)/ganglia.d/* $(sysconfdir)/$(PROGRAM)/ganglia.d/
 	@install -m 0750 sbin/$(PROGRAM) $(sbindir)/
