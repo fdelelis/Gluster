@@ -24,12 +24,17 @@ CLEANDIRS = \
 all: clean
 
 install:
-	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)
-	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)/ganglia.d
-	@install -m 0750 -d $(sysconfdir)/$(PROGRAM)/ganglia.custom.d
-	@install -m 0640 conf/$(PROGRAM)/$(PROGRAM).cfg $(sysconfdir)/$(PROGRAM)/
-	@install -m 0750 conf/$(PROGRAM)/ganglia.d/* $(sysconfdir)/$(PROGRAM)/ganglia.d/
-	@install -m 0750 sbin/$(PROGRAM) $(sbindir)/
-	@install -m 0750 sbin/niopid $(sbindir)/
+        @mkdir -p $(DESTDIR)$(sbindir)/
+        @install -m 0750 sbin/$(PROGRAM) $(DESTDIR)$(sbindir)/
+        @install -m 0750 sbin/niopid $(DESTDIR)$(sbindir)/
+        @install -m 0750 -d $(DESTDIR)$(sysconfdir)/$(PROGRAM)
+        @install -m 0640 conf/$(PROGRAM)/$(PROGRAM).cfg $(DESTDIR)$(sysconfdir)/$(PROGRAM)/
+        @for configdir in `ls -d conf/$(PROGRAM)/*.d`; do \
+          configdir=`basename $${configdir} .d`; \
+          echo $${configdir}; \
+          install -m 0750 -d $(DESTDIR)$(sysconfdir)/$(PROGRAM)/$${configdir}.d; \
+          install -m 0750 -d $(DESTDIR)$(sysconfdir)/$(PROGRAM)/$${configdir}.custom.d; \
+          install -m 0640 conf/$(PROGRAM)/$${configdir}.d/* $(DESTDIR)$(sysconfdir)/$(PROGRAM)/$${configdir}.d/; \
+        done
 clean:
 	@rm -f $(CLEANDIRS)
