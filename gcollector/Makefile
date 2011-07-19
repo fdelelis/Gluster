@@ -62,7 +62,7 @@ prep_pkgbuild: sdist
 	@echo "Preparing for package build"
 	@mkdir -p $(pkgbuilddir)
 	@mkdir -p $(pkgdir)
-	@cp $(PROGRAM).tgz $(pkgbuilddir)
+	@mv $(PROGRAM).tgz $(pkgbuilddir)
 
 srpm: prep_pkgbuild
 	@echo "Building source package (RPM)"
