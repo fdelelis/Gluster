@@ -1,3 +1,7 @@
+= NIOPID = 
+
+niopid is heavily based on the core of NetHogs, an excellent OSS project. niopid changes NetHogs in a couple of ways. 1. It removes the ncurses output in favor of stdout. 2. It requires a pid as input and limits the monitoring to that pid. We haven't decided wether or not to sumbit the changes back to NetHogs or keep the project seperate. Your input is welcome. 
+
 = NETHOGS =
 
 http://nethogs.sf.net
